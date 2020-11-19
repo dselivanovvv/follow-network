@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile detail
+{% endblock %}
+
+
+{% block content%}
+<!-- modal -->
+
+
+    <div class="ui grid">
+        <div class="row">
+            <div class="four wide column">
+                {{ object }}
+                <hr>
+                {% if follow %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value="{{ object.pk }}">
+                        <button type="submit" class="ui negative button"> unfollow</button>
+                    </form>
+                {% else %}
+                    <button id="follow-btn" class="ui positive button">follow</button>
+                {% endif %}
+            </div>
+
+            <div class="twelve wide column">
+                {% for post in object.profiles_posts %}
+                    <div class="ui segment">
+                        {{ post.body }}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    {{ object }}
+    <br>
+    {{ follow }}
+
+{% endblock %}
