@@ -10,7 +10,7 @@
         <div class="ui segment">
             {{ profile }}
             <br>
-            <a href="{% url 'profiles:profile-detail-view' profile.pk %}">
+            <a href="{{profile.get_absolute_url}}">
                 <button class="ui primary button">See profile</button>
             </a>
         </div>

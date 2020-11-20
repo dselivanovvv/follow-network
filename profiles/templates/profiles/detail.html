@@ -6,7 +6,7 @@
 
 
 {% block content%}
-<!-- modal -->
+    <!-- modal -->
 
 
     <div class="ui grid">
@@ -15,29 +15,31 @@
                 {{ object }}
                 <hr>
                 {% if follow %}
-                    <form action="" method="post">
+                    <form action="{% url 'profiles:follow-unfollow-view' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="profile_pk" value="{{ object.pk }}">
                         <button type="submit" class="ui negative button"> unfollow</button>
                     </form>
                 {% else %}
-                    <button id="follow-btn" class="ui positive button">follow</button>
+                    <form action="{% url 'profiles:follow-unfollow-view' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value="{{ object.pk }}">
+                        <button class="ui positive button">follow</button>
+                    </form>
                 {% endif %}
             </div>
 
             <div class="twelve wide column">
                 {% for post in object.profiles_posts %}
-                    <div class="ui segment">
-                        {{ post.body }}
-                    </div>
+                    {% include 'posts/posts_list.html' %}
+                    <a href="{{ post.get_absolute_url }}" class="ui primary button">See post</a>
+
+
                 {% endfor %}
 
             </div>
         </div>
     </div>
 
-    {{ object }}
-    <br>
-    {{ follow }}
 
 {% endblock %}
