@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+Hello from network!
+New post are waiting for u!
+<br>
+Title: {{ post.title }}
+<br>
+
+<div>
+{#    <a href="https://mysite.com{{ post.get_absolute_url }}">Click to link to see this post</a>#}
+    <a href="http://127.0.0.1:8000{{ post.get_absolute_url }}">Click to link to see this post</a>
+
+</div>
+
+
+</body>
+</html>
