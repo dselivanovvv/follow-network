@@ -38,13 +38,19 @@ class PostDetailView(DetailView):
     template_name = 'posts/post_detail.html'
     context_object_name = 'post'
 
-
     def get_object(self, queryset=None):
         return get_object_or_404(Post, slug=self.kwargs.get('post_slug'))
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        my_profile = Profile.objects.get(user=self.request.user)
+
+        context['read'] = my_profile.read.all()
+
+        return context
+
 
 class PostCreate(View):
-
     form_model = PostForm
     template = 'posts/post_create.html'
     raise_exception = True

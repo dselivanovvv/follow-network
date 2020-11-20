@@ -1,20 +1,25 @@
-<div class="ui segment">
-    <h3>
-        <a href="{{ post.get_absolute_url }}" class="">{{ post.title }}</a>
-    </h3>
+<div class="card">
+    <div class="card-header">
+        {{ post.author }} | {{ post.created }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="{% url 'posts:post-detail-view' post.slug%}">
+                {{post.title}}
+            </a>
+        </h5>
+        <p class="card-text">{{post.body}}</p>
 
-    {{ post.author }} | {{ post.created }}
-    <hr>
-    {{ post.body }}
-    <form action="{% url 'profiles:read-unread-view' %}" method="post">
-        {% csrf_token %}
-        {% if post in read %}
-            <input type="hidden" name="post_pk" value="{{ post.pk }}">
-            <button class="ui negative button">Mark unread</button>
-        {% else %}
-            <input type="hidden" name="post_pk" value="{{ post.pk }}">
-            <button class="ui positive button">Mark as read</button>
-        {% endif %}
-    </form>
-
+        <form action="{% url 'profiles:read-unread-view' %}" method="post">
+            {% csrf_token %}
+            {% if post in read %}
+                <input type="hidden" name="post_pk" value="{{ post.pk }}">
+                <button class="btn btn-danger">Mark unread</button>
+            {% else %}
+                <input type="hidden" name="post_pk" value="{{ post.pk }}">
+                <button class="btn btn-success">Mark as read</button>
+            {% endif %}
+        </form>
+    </div>
 </div>
+<br>

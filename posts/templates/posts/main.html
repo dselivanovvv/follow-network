@@ -1,40 +1,35 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    main posts
+    Home
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="ui grid">
-        <div class="row">
-            <div class="four wide column">
-                {{ profile }}
-                <br><br>
-                <a href="{% url 'profiles:profile-list-view' %}">
-                    <button class="ui primary button">People to follow</button>
-                </a>
-                <br><br>
-                Following:
-                <ul>
-                    {% for p in profile.following.all %}
 
-                        <li>{{ p }}</li>
+    <h3>My blog | {{ profile }} </h3>
 
-                    {% endfor %}
+    <h5>Following:</h5>
+    <ul>
+        {% for p in profile.following.all %}
 
-                </ul>
+            <li>{{ p }}</li>
 
-            </div>
-            <div class="twelve wide column">
-                Posts:
-                <hr>
-                {% for post in posts %}
-                    {% include 'posts/posts_list.html' %}
-                {% endfor %}
+        {% endfor %}
 
-            </div>
-        </div>
+    </ul>
+
+    <div>
+        <h4>Posts:</h4>
+        <hr>
+        {% for post in posts %}
+            {% include 'posts/posts_list.html' %}
+        {% endfor %}
+
     </div>
+
+
+
+
 {% endblock %}
