@@ -1,10 +1,9 @@
 <div class="ui segment">
     <h3>
         <a href="{{ post.get_absolute_url }}" class="">{{ post.title }}</a>
-
     </h3>
 
-    {{ post.author }} |  | {{ post.created }}
+    {{ post.author }} | {{ post.created }}
     <hr>
     {{ post.body }}
     <form action="{% url 'profiles:read-unread-view' %}" method="post">
@@ -17,6 +16,5 @@
             <button class="ui positive button">Mark as read</button>
         {% endif %}
     </form>
-
 
 </div>

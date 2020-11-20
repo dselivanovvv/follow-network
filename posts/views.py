@@ -1,8 +1,10 @@
 from itertools import chain
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
 from django.views.generic import DetailView
 
+from posts.forms import PostForm
 from posts.models import Post
 from profiles.models import Profile
 
@@ -39,3 +41,26 @@ class PostDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Post, slug=self.kwargs.get('post_slug'))
+
+
+class PostCreate(View):
+
+    form_model = PostForm
+    template = 'posts/post_create.html'
+    raise_exception = True
+
+    def get(self, request):
+        form = self.form_model()
+        return render(request, self.template, context={'form': form})
+
+    def post(self, request):
+        bound_form = self.form_model(request.POST)
+
+        if bound_form.is_valid():
+            new_obj = bound_form.save(commit=False)
+            new_obj.author = request.user.profile
+            new_obj.save()
+            return redirect('posts:post-detail-view',
+                            post_slug=new_obj.slug)
+
+        return render(request, self.template, context={'form': bound_form})
