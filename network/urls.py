@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from .views import redirect_to_main_page
+
 urlpatterns = [
+    path('', redirect_to_main_page, name='redirect-to-main-page'),
     path('admin/', admin.site.urls),
     path('profiles/', include('profiles.urls', namespace='profiles')),
     path('posts/', include('posts.urls', namespace='posts')),
