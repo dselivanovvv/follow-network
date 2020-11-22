@@ -9,6 +9,7 @@ $ git clone https://github.com/DanyilS/follow-network.git
 Used sqlite, docker contain only web-service, so before running the app - run it on your machine locally to create db: 
 
 (venv) $ py manage.py migrate
+
 (venv) $ py manage.py createsuperuser
 
 
