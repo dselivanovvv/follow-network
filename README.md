@@ -1,8 +1,14 @@
 Simple network implementation using Django
 
 
-You can pull the docker-image to your machine and run it as usual:
+Clone this repository to your machine:
+
+$ git clone https://github.com/DanyilS/follow-network.git
+
+$ docker build .
+
+$ docker-compose up
+
+or this image on docker hub: 
 
 $ docker pull sdanik/network_web
-
-
