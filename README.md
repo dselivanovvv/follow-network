@@ -1,4 +1,4 @@
-Simple network implementation using Django
+Simple social network implementation using Django
 --------------------------------
 
 Clone this repository to your machine:
